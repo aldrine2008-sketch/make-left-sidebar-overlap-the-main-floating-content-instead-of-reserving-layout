@@ -74,6 +74,9 @@ const ProfileVerificationPage = lazy(
   () => import("./pages/RightSidebar/ProfileVerificationPage"),
 );
 
+// Clock/Time pages
+const ClockDemoPage = lazy(() => import("./pages/ClockDemoPage"));
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -391,6 +394,17 @@ const transactionWorkflowRoute = createRoute({
   ),
 });
 
+// Clock demo route
+const clockRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/clock",
+  component: () => (
+    <Suspense fallback={<PageLoader />}>
+      <ClockDemoPage />
+    </Suspense>
+  ),
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
@@ -417,6 +431,7 @@ const routeTree = rootRoute.addChildren([
   notificationsRoute,
   profileRoute,
   transactionWorkflowRoute,
+  clockRoute,
 ]);
 
 const router = createRouter({ routeTree });
