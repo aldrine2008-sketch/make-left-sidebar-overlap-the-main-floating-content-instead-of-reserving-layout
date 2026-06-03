@@ -1,2 +1,3 @@
-# make-left-sidebar-overlap-the-main-floating-content-instead-of-reserving-layout
-Exported from Caffeine project: Make left sidebar overlap the main floating content instead of reserving layout space
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

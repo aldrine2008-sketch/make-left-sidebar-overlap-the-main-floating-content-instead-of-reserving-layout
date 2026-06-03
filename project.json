@@ -1,0 +1,27 @@
+{
+  "overview": "GeoSentinel is a professional government-grade land ownership and dispute management platform for Kenya, with title deed verification, multi-stage transactions, dispute evidence, AI valuation, market analytics, and full audit trail.",
+  "features": [
+    "Title deed verification workflow with officer sign-off",
+    "Multi-stage transaction progress tracker",
+    "Dispute evidence upload and timeline",
+    "AI Land Valuation calculator",
+    "Risk Intelligence dashboard",
+    "Market Analytics with real data",
+    "Buyer-Seller Marketplace",
+    "Investment Portfolio tracker",
+    "Infrastructure Projects tracker",
+    "Audit trail and compliance log",
+    "Professional Ardhi Sasa-style dashboard"
+  ],
+  "category": "land-management",
+  "tags": [
+    "kenya",
+    "land-registry",
+    "government",
+    "gis",
+    "real-estate",
+    "compliance",
+    "dispute-resolution"
+  ],
+  "last_updated": "2026-05-20T18:21:41.608Z"
+}

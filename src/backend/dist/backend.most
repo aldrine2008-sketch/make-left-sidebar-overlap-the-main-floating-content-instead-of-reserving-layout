@@ -1,0 +1,386 @@
+// Version: 1.0.0
+type AccountStatus__387317020 =
+  {#active; #closed; #pendingVerification; #suspended};
+type ApplicationStatus__938853177 =
+  {#approved; #cancelled; #draft; #rejected; #submitted; #underReview};
+type AuditEntry__849002978 =
+  {
+    actionType : Text;
+    details : Text;
+    entityId : Text;
+    entityType : Text;
+    id : Text;
+    initiator : Principal;
+    timestamp : Int
+  };
+type BudgetRange__430128818 = {maxBudget : Float; minBudget : Float};
+type Conversation__183739819 =
+  {
+    id : Text;
+    lastMessageTimestamp : Int;
+    messages : [Message__19119041];
+    participantA : Principal;
+    participantB : Principal
+  };
+type Coordinates__108420619 = {latitude : Float; longitude : Float};
+type Data__159895909<T> = {var count : Nat__490723111; elements : [var ?T]};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DisputeEvidence__356669969 =
+  {
+    description : Text;
+    disputeId : Text;
+    fileId : Text;
+    fileName : Text;
+    fileSize : Nat;
+    id : Text;
+    timestamp : Int;
+    uploadedBy : Principal
+  };
+type DisputeStatus__700194661 = {#open; #resolved; #underReview};
+type DisputeTimelineEvent__40656662 =
+  {
+    description : Text;
+    disputeId : Text;
+    eventType : Text;
+    evidenceIds : [Text];
+    id : Text;
+    initiator : Principal;
+    timestamp : Int
+  };
+type Dispute__575102370 =
+  {
+    comments : List__415060402<Text>;
+    created : Time__900049286;
+    id : Text;
+    initiator : Principal;
+    propertyId : Text;
+    reason : Text;
+    status : DisputeStatus__700194661;
+    updated : Time__900049286
+  };
+type DomainRole__532311307 = {#admin; #citizen; #landOfficer};
+type ExternalBlob__671167343 = Blob;
+type IdentityFields__1071202867 =
+  {
+    dateOfBirth : Text;
+    ethnicity : Text;
+    nationalId : Text;
+    passportNumber : Text
+  };
+type InfrastructureProject__402224955 =
+  {
+    created : Time__900049286;
+    details : Text;
+    id : Text;
+    location : Text;
+    name : Text;
+    status : ProjectStatus__864668988
+  };
+type Int__270357528 = Int__616954475;
+type Int__616954475 = Int;
+type Internal__667636161<T> =
+  {children : [var ?Node__92254746<T>]; data : Data__159895909<T>};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type LandApplication__10687145 =
+  {
+    area : ?Nat;
+    attachments : Set__532252804<ExternalBlob__671167343>;
+    created : Time__900049286;
+    id : Text;
+    location : Text;
+    owner : Principal;
+    status : ApplicationStatus__938853177;
+    titleNumber : Text;
+    updated : Time__900049286
+  };
+type Leaf__520550824<T> = {data : Data__159895909<T>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type MarketSummary__1067198079 =
+  {averagePrice : Float; location : Text; numTransactions : Nat};
+type MarketTrend__874408699 =
+  {created : Time__900049286; id : Text; location : Text; price : Float};
+type Message__19119041 =
+  {
+    content : Text;
+    id : Text;
+    read : Bool;
+    receiver : Principal;
+    sender : Principal;
+    timestamp : Int
+  };
+type MotionPreference__51996943 = {#advanced; #default; #reduced};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Node__92254746<T> =
+  {#internal : Internal__667636161<T>; #leaf : Leaf__520550824<T>};
+type NotificationPreferences__424666350 =
+  {criticalAlertsOnly : Bool; email : Bool; push : Bool; sms : Bool};
+type Notification__879889657 =
+  {
+    id : Text;
+    message : Text;
+    read : Bool;
+    recipient : Principal;
+    timestamp : Time__900049286
+  };
+type Preferences__899524316 =
+  {
+    aiPersonalization :
+      {
+        budgetRange : BudgetRange__430128818;
+        growthExpectation : Nat;
+        investmentGoals : [Text];
+        preferredLandType : Text;
+        riskAppetite : RiskType__727250067
+      };
+    notifyDisputes : Bool;
+    notifyInfrastructureUpdates : Bool;
+    notifyMarketTrends : Bool;
+    notifyNewListings : Bool;
+    notifyPriceDrops : Bool;
+    preferredRegions : [Text];
+    riskTolerance : RiskType__727250067
+  };
+type PricePoint__36380829 = {price : Float; timestamp : Time__900049286};
+type PrivacyPreferences__141520147 =
+  {
+    allowDataCollection : Bool;
+    shareLocation : Bool;
+    showPublicProfile : Bool
+  };
+type ProjectStatus__864668988 = {#completed; #ongoing; #planned};
+type PropertyReport__282587980 =
+  {
+    author : Principal;
+    content : Text;
+    created : Time__900049286;
+    id : Text;
+    propertyId : Text
+  };
+type PropertyStatus__213494229 = {#active; #disputed; #pending; #sold};
+type Property__1067406498 =
+  {
+    area : Float;
+    created : Time__900049286;
+    id : Text;
+    location : Text;
+    owner : Principal;
+    status : PropertyStatus__213494229;
+    titleNumber : Text;
+    updated : Time__900049286;
+    value : Float
+  };
+type RiskType__727250067 = {#high; #low; #medium};
+type SavedProperty__835560891 =
+  {
+    id : Text;
+    propertyId : Text;
+    savedAt : Time__900049286;
+    userId : Principal
+  };
+type Set__532252804<T> = Set__710576254<T>;
+type Set__710576254<T> =
+  {var root : Node__92254746<T>; var size : Nat__490723111};
+type ThemePreference__140704481 = {#dark; #futuristic; #light};
+type Time__796480547 = Int__270357528;
+type Time__900049286 = Time__796480547;
+type TransactionStageEntry__553034246 =
+  {
+    initiator : Principal;
+    notes : Text;
+    stage : TransactionStage__428450979;
+    timestamp : Int
+  };
+type TransactionStage__428450979 =
+  {#cancelled; #completed; #escrow; #proposed; #recorded; #stampDuty};
+type TransactionStatus__426104033 = {#completed; #disputed; #initiated};
+type Transaction__865268250 =
+  {
+    buyer : Principal;
+    date : Time__900049286;
+    id : Text;
+    price : Float;
+    propertyId : Text;
+    seller : Principal;
+    status : TransactionStatus__426104033
+  };
+type UserRole__1073662873 = {#admin; #guest; #user};
+type UserSettings__590554603 =
+  {
+    motionPreference : MotionPreference__51996943;
+    notifications : NotificationPreferences__424666350;
+    privacy : PrivacyPreferences__141520147;
+    themePreference : ThemePreference__140704481
+  };
+type ValuationStatus__546465572 = {#approved; #disputed; #pending};
+type Valuation__5553628 =
+  {
+    created : Time__900049286;
+    date : Time__900049286;
+    id : Text;
+    propertyId : Text;
+    status : ValuationStatus__546465572;
+    value : Float;
+    valuer : Principal
+  };
+type VerificationRecord__153621827 =
+  {
+    notes : Text;
+    officerId : Principal;
+    status : VerificationStatus__397273111;
+    timestamp : Int
+  };
+type VerificationStatus__397273111 =
+  {#pendingReview; #rejected; #unverified; #verified};
+type VerifiedUserProfile__92815619 =
+  {
+    accountStatus : AccountStatus__387317020;
+    emailVerified : Bool;
+    idDocument : ?ExternalBlob__671167343;
+    identityFields : ?IdentityFields__1071202867;
+    name : Text;
+    phoneVerified : Bool;
+    photo : ?ExternalBlob__671167343;
+    riskType : RiskType__727250067;
+    role : DomainRole__532311307
+  };
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1073662873>
+    };
+  stable applications :
+    {
+      var root : Node__46230540<Text, LandApplication__10687145>;
+      var size : Nat__490723111
+    };
+  stable auditLog :
+    {
+      var root : Node__46230540<Text, AuditEntry__849002978>;
+      var size : Nat__490723111
+    };
+  stable conversations :
+    {
+      var root : Node__46230540<Text, Conversation__183739819>;
+      var size : Nat__490723111
+    };
+  stable var currentId : Nat;
+  stable demandScores :
+    {var root : Node__46230540<Text, Nat>; var size : Nat__490723111};
+  stable disputeEvidence :
+    {
+      var root : Node__46230540<Text, DisputeEvidence__356669969>;
+      var size : Nat__490723111
+    };
+  stable disputeTimeline :
+    {
+      var root : Node__46230540<Text, DisputeTimelineEvent__40656662>;
+      var size : Nat__490723111
+    };
+  stable disputes :
+    {
+      var root : Node__46230540<Text, Dispute__575102370>;
+      var size : Nat__490723111
+    };
+  stable infrastructureProjects :
+    {
+      var root : Node__46230540<Text, InfrastructureProject__402224955>;
+      var size : Nat__490723111
+    };
+  stable locationCoordinates :
+    {
+      var root : Node__46230540<Text, Coordinates__108420619>;
+      var size : Nat__490723111
+    };
+  stable marketSummaries :
+    {
+      var root : Node__46230540<Text, MarketSummary__1067198079>;
+      var size : Nat__490723111
+    };
+  stable marketTrends :
+    {
+      var root : Node__46230540<Text, [PricePoint__36380829]>;
+      var size : Nat__490723111
+    };
+  stable marketTrendsMap :
+    {
+      var root : Node__46230540<Text, MarketTrend__874408699>;
+      var size : Nat__490723111
+    };
+  stable notifications :
+    {
+      var root : Node__46230540<Text, Notification__879889657>;
+      var size : Nat__490723111
+    };
+  stable properties :
+    {
+      var root : Node__46230540<Text, Property__1067406498>;
+      var size : Nat__490723111
+    };
+  stable propertyReports :
+    {
+      var root : Node__46230540<Text, PropertyReport__282587980>;
+      var size : Nat__490723111
+    };
+  stable propertyVerificationHistory :
+    {
+      var root :
+        Node__46230540<Text, List__415060402<VerificationRecord__153621827>>;
+      var size : Nat__490723111
+    };
+  stable savedProperties :
+    {
+      var root : Node__46230540<Text, SavedProperty__835560891>;
+      var size : Nat__490723111
+    };
+  stable searchCounts :
+    {var root : Node__46230540<Text, Nat>; var size : Nat__490723111};
+  stable transactionStageHistory :
+    {
+      var root :
+        Node__46230540<Text,
+                        List__415060402<TransactionStageEntry__553034246>>;
+      var size : Nat__490723111
+    };
+  stable transactions :
+    {
+      var root : Node__46230540<Text, Transaction__865268250>;
+      var size : Nat__490723111
+    };
+  stable userPreferences :
+    {
+      var root : Node__46230540<Principal, Preferences__899524316>;
+      var size : Nat__490723111
+    };
+  stable userProfiles :
+    {
+      var root : Node__46230540<Principal, VerifiedUserProfile__92815619>;
+      var size : Nat__490723111
+    };
+  stable userSettings :
+    {
+      var root : Node__46230540<Principal, UserSettings__590554603>;
+      var size : Nat__490723111
+    };
+  stable valuations :
+    {
+      var root : Node__46230540<Text, Valuation__5553628>;
+      var size : Nat__490723111
+    }
+};

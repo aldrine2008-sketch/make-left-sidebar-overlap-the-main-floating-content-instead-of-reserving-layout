@@ -1,0 +1,659 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type VerifiedUserProfile = 
+ record {
+   accountStatus: AccountStatus;
+   emailVerified: bool;
+   idDocument: opt ExternalBlob;
+   identityFields: opt IdentityFields;
+   name: text;
+   phoneVerified: bool;
+   photo: opt ExternalBlob;
+   riskType: RiskType;
+   role: DomainRole;
+ };
+type VerificationStatus = 
+ variant {
+   pendingReview;
+   rejected;
+   unverified;
+   verified;
+ };
+type VerificationRecord = 
+ record {
+   notes: text;
+   officerId: principal;
+   status: VerificationStatus;
+   timestamp: int;
+ };
+type ValuationStatus = 
+ variant {
+   approved;
+   disputed;
+   pending;
+ };
+type ValuationResult = 
+ record {
+   comparableProperties: vec text;
+   confidenceScore: float64;
+   estimatedValueKES: float64;
+   growthForecastPercent: float64;
+   investmentPotential: text;
+ };
+type ValuationInput = 
+ record {
+   landSizeAcres: float64;
+   location: text;
+   nearbyAmenities: vec text;
+   roadAccess: bool;
+ };
+type Valuation = 
+ record {
+   created: Time;
+   date: Time;
+   id: text;
+   propertyId: text;
+   status: ValuationStatus;
+   value: float64;
+   valuer: principal;
+ };
+type UserSettings = 
+ record {
+   motionPreference: MotionPreference;
+   notifications: NotificationPreferences;
+   privacy: PrivacyPreferences;
+   themePreference: ThemePreference;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TransactionStatus = 
+ variant {
+   completed;
+   disputed;
+   initiated;
+ };
+type TransactionStageEntry = 
+ record {
+   initiator: principal;
+   notes: text;
+   stage: TransactionStage;
+   timestamp: int;
+ };
+type TransactionStage = 
+ variant {
+   cancelled;
+   completed;
+   escrow;
+   proposed;
+   recorded;
+   stampDuty;
+ };
+type Transaction = 
+ record {
+   buyer: principal;
+   date: Time;
+   id: text;
+   price: float64;
+   propertyId: text;
+   seller: principal;
+   status: TransactionStatus;
+ };
+type Time = int;
+type ThemePreference = 
+ variant {
+   dark;
+   futuristic;
+   light;
+ };
+type SendMessageResponse = 
+ record {
+   message: text;
+   success: bool;
+ };
+type SavedProperty = 
+ record {
+   id: text;
+   propertyId: text;
+   savedAt: Time;
+   userId: principal;
+ };
+type RiskType = 
+ variant {
+   high;
+   low;
+   medium;
+ };
+type RiskSummary = 
+ record {
+   fraudAlertCount: nat;
+   highRiskProperties: vec text;
+   recentDisputes: vec DisputeView;
+   riskScore: float64;
+ };
+type PropertyStatus = 
+ variant {
+   active;
+   disputed;
+   pending;
+   sold;
+ };
+type PropertyReport = 
+ record {
+   author: principal;
+   content: text;
+   created: Time;
+   id: text;
+   propertyId: text;
+ };
+type Property = 
+ record {
+   area: float64;
+   created: Time;
+   id: text;
+   location: text;
+   owner: principal;
+   status: PropertyStatus;
+   titleNumber: text;
+   updated: Time;
+   value: float64;
+ };
+type ProjectStatus = 
+ variant {
+   completed;
+   ongoing;
+   planned;
+ };
+type PrivacyPreferences = 
+ record {
+   allowDataCollection: bool;
+   shareLocation: bool;
+   showPublicProfile: bool;
+ };
+type PricePoint = 
+ record {
+   price: float64;
+   timestamp: Time;
+ };
+type Preferences = 
+ record {
+   aiPersonalization:
+    record {
+      budgetRange: BudgetRange;
+      growthExpectation: nat;
+      investmentGoals: vec text;
+      preferredLandType: text;
+      riskAppetite: RiskType;
+    };
+   notifyDisputes: bool;
+   notifyInfrastructureUpdates: bool;
+   notifyMarketTrends: bool;
+   notifyNewListings: bool;
+   notifyPriceDrops: bool;
+   preferredRegions: vec text;
+   riskTolerance: RiskType;
+ };
+type PortfolioSummary = 
+ record {
+   annualGrowthRate: float64;
+   properties: vec Property;
+   riskDistribution: record {
+                       high: nat;
+                       low: nat;
+                       medium: nat;
+                     };
+   totalEstimatedValue: float64;
+ };
+type NotificationPreferences = 
+ record {
+   criticalAlertsOnly: bool;
+   email: bool;
+   push: bool;
+   sms: bool;
+ };
+type NotificationFeedItem = 
+ record {
+   body: text;
+   id: text;
+   link: opt text;
+   read: bool;
+   timestamp: int;
+   title: text;
+   "type": text;
+ };
+type Notification = 
+ record {
+   id: text;
+   message: text;
+   read: bool;
+   recipient: principal;
+   timestamp: Time;
+ };
+type MotionPreference = 
+ variant {
+   advanced;
+   default;
+   reduced;
+ };
+type Message = 
+ record {
+   content: text;
+   id: text;
+   read: bool;
+   receiver: principal;
+   sender: principal;
+   timestamp: int;
+ };
+type MarketTrendData = 
+ record {
+   demandScore: nat;
+   location: text;
+   priceTrend: vec PricePoint;
+ };
+type MarketTrend = 
+ record {
+   created: Time;
+   id: text;
+   location: text;
+   price: float64;
+ };
+type MarketSummary = 
+ record {
+   averagePrice: float64;
+   location: text;
+   numTransactions: nat;
+ };
+type MarketAnalytics = 
+ record {
+   activeListings: nat;
+   appreciationRates: vec record {
+                            text;
+                            float64;
+                          };
+   pricesByRegion: vec record {
+                         text;
+                         float64;
+                       };
+   topRegions: vec text;
+ };
+type LandApplicationView = 
+ record {
+   area: opt nat;
+   attachments: vec ExternalBlob;
+   created: Time;
+   id: text;
+   location: text;
+   owner: principal;
+   status: ApplicationStatus;
+   titleNumber: text;
+   updated: Time;
+ };
+type InvestmentResult = 
+ record {
+   breakEvenYears: float64;
+   profitKES: float64;
+   profitPercent: float64;
+   projectedValueKES: float64;
+   roiPercent: float64;
+ };
+type InvestmentInput = 
+ record {
+   annualGrowthRatePercent: float64;
+   buyingPriceKES: float64;
+   investmentYears: nat;
+ };
+type InfrastructureTimelineItem = 
+ record {
+   description: text;
+   endDate: opt int;
+   id: text;
+   impactRadius: float64;
+   name: text;
+   region: text;
+   startDate: int;
+   status: text;
+   "type": text;
+ };
+type InfrastructureProject = 
+ record {
+   created: Time;
+   details: text;
+   id: text;
+   location: text;
+   name: text;
+   status: ProjectStatus;
+ };
+type IdentityFields = 
+ record {
+   dateOfBirth: text;
+   ethnicity: text;
+   nationalId: text;
+   passportNumber: text;
+ };
+type GeneratedPropertyReport = 
+ record {
+   content: text;
+   generatedAt: int;
+   reportId: text;
+ };
+type ExternalBlob = blob;
+type DomainRole = 
+ variant {
+   admin;
+   citizen;
+   landOfficer;
+ };
+type DisputeView = 
+ record {
+   comments: vec text;
+   created: Time;
+   id: text;
+   initiator: principal;
+   propertyId: text;
+   reason: text;
+   status: DisputeStatus;
+   updated: Time;
+ };
+type DisputeTimelineEvent = 
+ record {
+   description: text;
+   disputeId: text;
+   eventType: text;
+   evidenceIds: vec text;
+   id: text;
+   initiator: principal;
+   timestamp: int;
+ };
+type DisputeStatus = 
+ variant {
+   open;
+   resolved;
+   underReview;
+ };
+type DisputeEvidence = 
+ record {
+   description: text;
+   disputeId: text;
+   fileId: text;
+   fileName: text;
+   fileSize: nat;
+   id: text;
+   timestamp: int;
+   uploadedBy: principal;
+ };
+type DemandHeatMapPoint = 
+ record {
+   coordinates: opt Coordinates;
+   demandScore: nat;
+   location: text;
+ };
+type DashboardStats = 
+ record {
+   activeDisputes: nat;
+   estimatedTotalLandValue: float64;
+   pendingTransactions: nat;
+   recentApplications:
+    vec record {
+          created: int;
+          id: text;
+          status: text;
+          titleNumber: text;
+        };
+   totalRegisteredTitles: nat;
+   verifiedOwners: nat;
+ };
+type Coordinates = 
+ record {
+   latitude: float64;
+   longitude: float64;
+ };
+type ConversationSummary = 
+ record {
+   id: text;
+   lastMessageTimestamp: int;
+   participantA: principal;
+   participantB: principal;
+   unreadMessagesCount: nat;
+ };
+type Conversation = 
+ record {
+   id: text;
+   lastMessageTimestamp: int;
+   messages: vec Message;
+   participantA: principal;
+   participantB: principal;
+ };
+type BudgetRange = 
+ record {
+   maxBudget: float64;
+   minBudget: float64;
+ };
+type AuditEntry = 
+ record {
+   actionType: text;
+   details: text;
+   entityId: text;
+   entityType: text;
+   id: text;
+   initiator: principal;
+   timestamp: int;
+ };
+type ApplicationStatus = 
+ variant {
+   approved;
+   cancelled;
+   draft;
+   rejected;
+   submitted;
+   underReview;
+ };
+type AccountStatus = 
+ variant {
+   active;
+   closed;
+   pendingVerification;
+   suspended;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  addDisputeEvidence: (disputeId: text, fileId: text, fileName: text,
+   fileSize: nat, description: text) -> (variant {
+                                           err: text;
+                                           ok: text;
+                                         });
+  advanceTransactionStage: (transactionId: text, notes: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  approveApplication: (appId: text) -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  calculateInvestment: (input: InvestmentInput) -> (InvestmentResult);
+  calculateValuation: (input: ValuationInput) ->
+   (variant {
+      err: text;
+      ok: ValuationResult;
+    });
+  cancelApplication: (appId: text) -> ();
+  checkApplicationStatus: (userId: principal) -> (vec LandApplicationView);
+  clearCallerPreferences: () -> ();
+  clearSearchCounts: () -> ();
+  clearUserSettings: () -> ();
+  createApplication: (titleNumber: text, area: opt nat, location: text) ->
+   (text);
+  createDispute: (disputeView: DisputeView) -> ();
+  createInfrastructureProject: (project: InfrastructureProject) -> ();
+  createMarketTrend: (trend: MarketTrend) -> ();
+  createNotification: (notification: Notification) -> ();
+  createProperty: (property: Property) -> ();
+  createPropertyReport: (report: PropertyReport) -> ();
+  createSavedProperty: (savedProperty: SavedProperty) -> ();
+  createTransaction: (transaction: Transaction) -> ();
+  createValuation: (valuation: Valuation) -> ();
+  deleteConversation: (conversationId: text) -> ();
+  deleteDispute: (id: text) -> ();
+  deleteInfrastructureProject: (id: text) -> ();
+  deleteMarketTrend: (id: text) -> ();
+  deleteNotification: (id: text) -> ();
+  deleteProperty: (id: text) -> ();
+  deletePropertyReport: (id: text) -> ();
+  deleteSavedProperty: (id: text) -> ();
+  deleteTransaction: (id: text) -> ();
+  deleteValuation: (id: text) -> ();
+  exportAuditCsv: (entityId: opt text) -> (text);
+  generatePropertyReport: (propertyId: text) ->
+   (variant {
+      err: text;
+      ok: GeneratedPropertyReport;
+    });
+  getAllCoordinates: () -> (vec record {
+                                  text;
+                                  Coordinates;
+                                }) query;
+  getAllMarketTrends: () -> (vec MarketTrendData) query;
+  getApplicationStatus: (appId: text) -> (ApplicationStatus) query;
+  getApplications: (owners: vec principal) -> (vec LandApplicationView);
+  getApplicationsByStatusInternal: (status: ApplicationStatus) ->
+   (vec LandApplicationView) query;
+  getAuditLog: (entityId: opt text, actionType: opt text, limit: nat) ->
+   (vec AuditEntry);
+  getCallerPreferences: () -> (Preferences) query;
+  getCallerUserProfile: () -> (opt VerifiedUserProfile) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCallerUserSettings: () -> (UserSettings) query;
+  getConversation: (partner: principal) -> (opt Conversation) query;
+  getConversationMessages: (partner: principal) -> (vec Message) query;
+  getConversations: () -> (vec ConversationSummary) query;
+  getDashboardStats: () -> (DashboardStats);
+  getDemandHeatMapPoints: () -> (vec DemandHeatMapPoint) query;
+  getDemandScore: (location: text) -> (nat) query;
+  getDispute: (id: text) -> (opt DisputeView) query;
+  getDisputeEvidence: (disputeId: text) ->
+   (variant {
+      err: text;
+      ok: vec DisputeEvidence;
+    });
+  getDisputeTimeline: (disputeId: text) ->
+   (variant {
+      err: text;
+      ok: vec DisputeTimelineEvent;
+    });
+  getInfrastructureProject: (id: text) -> (opt InfrastructureProject) query;
+  getInfrastructureTimeline: (region: opt text) ->
+   (vec InfrastructureTimelineItem);
+  getInvestmentPortfolioSummary: () -> (PortfolioSummary);
+  getLocationCoordinates: (location: text) -> (opt Coordinates) query;
+  getMarketAnalytics: (region: opt text) -> (MarketAnalytics);
+  getMarketSummary: (location: text) -> (opt MarketSummary) query;
+  getMarketTrend: (id: text) -> (opt MarketTrend) query;
+  getMarketplaceListings: (verified: opt bool, minPrice: opt float64,
+   maxPrice: opt float64) -> (vec Property);
+  getNotification: (id: text) -> (opt Notification) query;
+  getNotificationFeed: (limit: nat) -> (vec NotificationFeedItem);
+  getPriceTrend: (location: text) -> (vec PricePoint) query;
+  getProperty: (id: text) -> (opt Property) query;
+  getPropertyReport: (id: text) -> (opt PropertyReport) query;
+  getRiskIntelligenceSummary: (region: opt text) -> (RiskSummary);
+  getSavedProperty: (id: text) -> (opt SavedProperty) query;
+  getTitleVerificationHistory: (propertyId: text) ->
+   (variant {
+      err: text;
+      ok: vec VerificationRecord;
+    });
+  getTopSearches: (limit: nat) -> (vec record {
+                                         text;
+                                         nat;
+                                       }) query;
+  getTransaction: (id: text) -> (opt Transaction) query;
+  getTransactionStageHistory: (transactionId: text) ->
+   (variant {
+      err: text;
+      ok: vec TransactionStageEntry;
+    });
+  getUserConversations: (userId: principal) ->
+   (vec ConversationSummary) query;
+  getUserPreferences: (_userId: principal) -> (Preferences) query;
+  getUserProfile: (user: principal) -> (opt VerifiedUserProfile) query;
+  getUserSettings: (userId: principal) -> (UserSettings) query;
+  getValuation: (id: text) -> (opt Valuation) query;
+  isCallerAdmin: () -> (bool) query;
+  listDisputes: () -> (vec DisputeView) query;
+  listInfrastructureProjects: () -> (vec InfrastructureProject) query;
+  listMarketTrends: () -> (vec MarketTrend) query;
+  listNotifications: () -> (vec Notification) query;
+  listProperties: () -> (vec Property) query;
+  listPropertyReports: () -> (vec PropertyReport) query;
+  listSavedProperties: () -> (vec SavedProperty) query;
+  listTransactions: () -> (vec Transaction) query;
+  listValuations: () -> (vec Valuation) query;
+  markAllMessagesAsRead: (conversationId: text) -> ();
+  markNotificationRead: (id: text) -> (variant {
+                                         err: text;
+                                         ok;
+                                       });
+  officerVerifyTitle: (propertyId: text, status: VerificationStatus, notes:
+   text) -> (variant {
+               err: text;
+               ok;
+             });
+  recordSearch: (location: text) -> ();
+  rejectApplication: (appId: text, _reason: text) -> ();
+  saveCallerUserProfile: (profile: VerifiedUserProfile) -> ();
+  searchApplicationByTitleNumber: (titleNumber: text) ->
+   (vec LandApplicationView);
+  searchApplicationsByLocation: (location: text) ->
+   (vec LandApplicationView) query;
+  searchApplicationsByTitleNumber: (titleNumber: text) ->
+   (vec LandApplicationView) query;
+  searchUsers: (searchTerm: text) ->
+   (vec record {
+          principal;
+          VerifiedUserProfile;
+        }) query;
+  sendMessage: (receiver: principal, content: text) -> (SendMessageResponse);
+  setCallerPreferences: (prefs: Preferences) -> ();
+  setDemandScore: (location: text, score: nat) -> ();
+  setLocationCoordinates: (location: text, latitude: float64, longitude:
+   float64) -> ();
+  setMarketSummary: (location: text, summary: MarketSummary) -> ();
+  setPriceTrend: (location: text, points: vec PricePoint) -> ();
+  submitApplication: (appId: text) -> ();
+  submitForVerification: (propertyId: text) -> (variant {
+                                                  err: text;
+                                                  ok;
+                                                });
+  updateCallerUserSettings: (settings: UserSettings) -> (UserSettings);
+  updateDispute: (disputeView: DisputeView) -> ();
+  updateInfrastructureProject: (project: InfrastructureProject) -> ();
+  updateMarketTrend: (trend: MarketTrend) -> ();
+  updateNotification: (notification: Notification) -> ();
+  updateProperty: (property: Property) -> ();
+  updatePropertyReport: (report: PropertyReport) -> ();
+  updateSavedProperty: (savedProperty: SavedProperty) -> ();
+  updateTransaction: (transaction: Transaction) -> ();
+  updateValuation: (valuation: Valuation) -> ();
+  uploadAttachment: (appId: text, externalBlob: ExternalBlob) -> ();
+}

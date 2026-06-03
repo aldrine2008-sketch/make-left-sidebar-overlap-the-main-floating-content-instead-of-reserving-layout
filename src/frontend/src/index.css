@@ -1,0 +1,559 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  src: url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --background: 97% 0 0;
+    --foreground: 15% 0.02 235;
+    --card: 100% 0 0;
+    --card-foreground: 15% 0.02 235;
+    --popover: 100% 0 0;
+    --popover-foreground: 15% 0.02 235;
+    --primary: 33% 0.1 152;
+    --primary-foreground: 98% 0 0;
+    --secondary: 93% 0.01 235;
+    --secondary-foreground: 15% 0.02 235;
+    --muted: 94% 0.01 235;
+    --muted-foreground: 50% 0.02 235;
+    --accent: 33% 0.1 152;
+    --accent-foreground: 98% 0 0;
+    --destructive: 40% 0.2 25;
+    --destructive-foreground: 98% 0 0;
+    --success: 35% 0.12 152;
+    --success-foreground: 98% 0 0;
+    --warning: 62% 0.14 75;
+    --warning-foreground: 15% 0.02 75;
+    --border: 88% 0.01 235;
+    --input: 88% 0.01 235;
+    --ring: 33% 0.1 152;
+    --radius: 0.25rem;
+    --sidebar-background: 100% 0 0;
+    --sidebar-foreground: 15% 0.02 235;
+    --sidebar-primary: 33% 0.1 152;
+    --sidebar-primary-foreground: 98% 0 0;
+    --sidebar-accent: 33% 0.1 152;
+    --sidebar-accent-foreground: 98% 0 0;
+    --sidebar-border: 88% 0.01 235;
+    --sidebar-ring: 33% 0.1 152;
+
+    /* Messaging colors - earth tones */
+    --message-sent-bg: 88% 0.08 35;
+    --message-received-bg: 88% 0.06 145;
+    --conversation-hover: 95% 0.01 240;
+    --unread-accent: 60% 0.15 35;
+
+    /* Glassmorphism properties */
+    --glass-bg-opacity: 0.18;
+    --glass-border-opacity: 0.25;
+    --glass-blur: 24px;
+
+    --chart-1: 55% 0.18 240;
+    --chart-2: 60% 0.15 145;
+    --chart-3: 70% 0.15 85;
+    --chart-4: 55% 0.22 25;
+    --chart-5: 65% 0.18 200;
+    --status-verified: 60% 0.15 145;
+    --status-pending: 70% 0.15 85;
+    --status-rejected: 55% 0.22 25;
+    --stage-1: 55% 0.18 200;
+    --stage-2: 70% 0.15 85;
+    --stage-3: 55% 0.18 280;
+    --stage-4: 60% 0.15 145;
+    --stage-5: 55% 0.18 240;
+  }
+
+  .dark {
+    --background: 14% 0.04 235;
+    --foreground: 96% 0.005 235;
+    --card: 18% 0.04 235;
+    --card-foreground: 96% 0.005 235;
+    --popover: 18% 0.04 235;
+    --popover-foreground: 96% 0.005 235;
+    --primary: 33% 0.1 152;
+    --primary-foreground: 98% 0 0;
+    --secondary: 22% 0.03 235;
+    --secondary-foreground: 96% 0.005 235;
+    --muted: 22% 0.03 235;
+    --muted-foreground: 65% 0.02 235;
+    --accent: 33% 0.1 152;
+    --accent-foreground: 98% 0 0;
+    --destructive: 45% 0.2 25;
+    --destructive-foreground: 98% 0 0;
+    --success: 38% 0.12 152;
+    --success-foreground: 98% 0 0;
+    --warning: 65% 0.14 75;
+    --warning-foreground: 15% 0.02 75;
+    --border: 26% 0.03 235;
+    --input: 26% 0.03 235;
+    --ring: 33% 0.1 152;
+    --sidebar-background: 14% 0.04 235;
+    --sidebar-foreground: 96% 0.005 235;
+    --sidebar-primary: 33% 0.1 152;
+    --sidebar-primary-foreground: 98% 0 0;
+    --sidebar-accent: 33% 0.1 152;
+    --sidebar-accent-foreground: 98% 0 0;
+    --sidebar-border: 26% 0.03 235;
+    --sidebar-ring: 33% 0.1 152;
+
+    /* Messaging colors - earth tones (dark mode) */
+    --message-sent-bg: 35% 0.08 35;
+    --message-received-bg: 35% 0.06 145;
+    --conversation-hover: 26% 0.02 240;
+    --unread-accent: 60% 0.15 35;
+
+    /* Glassmorphism properties - dark */
+    --glass-bg-opacity: 0.18;
+    --glass-border-opacity: 0.25;
+    --glass-blur: 24px;
+
+    --chart-1: 65% 0.18 240;
+    --chart-2: 60% 0.15 145;
+    --chart-3: 70% 0.15 85;
+    --chart-4: 55% 0.22 25;
+    --chart-5: 65% 0.18 200;
+    --status-verified: 60% 0.15 145;
+    --status-pending: 70% 0.15 85;
+    --status-rejected: 55% 0.22 25;
+    --stage-1: 65% 0.18 200;
+    --stage-2: 70% 0.15 85;
+    --stage-3: 65% 0.18 280;
+    --stage-4: 60% 0.15 145;
+    --stage-5: 65% 0.18 240;
+  }
+
+  .land-gold {
+    --background: oklch(96% 0.03 80);
+    --foreground: oklch(25% 0.02 80);
+    --card: oklch(98% 0.02 80);
+    --card-foreground: oklch(25% 0.02 80);
+    --popover: oklch(98% 0.02 80);
+    --popover-foreground: oklch(25% 0.02 80);
+    --primary: oklch(55% 0.15 80);
+    --primary-foreground: oklch(98% 0.01 80);
+    --secondary: oklch(90% 0.03 80);
+    --secondary-foreground: oklch(25% 0.02 80);
+    --muted: oklch(92% 0.02 80);
+    --muted-foreground: oklch(50% 0.02 80);
+    --accent: oklch(92% 0.03 80);
+    --accent-foreground: oklch(25% 0.02 80);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0.01 25);
+    --success: oklch(60% 0.15 145);
+    --success-foreground: oklch(98% 0.01 145);
+    --warning: oklch(70% 0.15 85);
+    --warning-foreground: oklch(20% 0.02 85);
+    --border: oklch(86% 0.02 80);
+    --input: oklch(86% 0.02 80);
+    --ring: oklch(55% 0.15 80);
+    --sidebar-background: oklch(98% 0.02 80);
+    --sidebar-foreground: oklch(25% 0.02 80);
+    --sidebar-primary: oklch(55% 0.15 80);
+    --sidebar-primary-foreground: oklch(98% 0.01 80);
+    --sidebar-accent: oklch(90% 0.03 80);
+    --sidebar-accent-foreground: oklch(25% 0.02 80);
+    --sidebar-border: oklch(86% 0.02 80);
+    --sidebar-ring: oklch(55% 0.15 80);
+
+    /* Messaging colors - earth tones (land-gold) */
+    --message-sent-bg: oklch(88% 0.08 35);
+    --message-received-bg: oklch(88% 0.06 145);
+    --conversation-hover: oklch(94% 0.02 80);
+    --unread-accent: oklch(60% 0.15 35);
+
+    /* Glassmorphism properties - land-gold */
+    --glass-bg-opacity: 0.15;
+    --glass-border-opacity: 0.2;
+    --glass-blur: 16px;
+  }
+
+  .futuristic {
+    --background: oklch(12% 0.03 280);
+    --foreground: oklch(92% 0.02 280);
+    --card: oklch(16% 0.03 280);
+    --card-foreground: oklch(92% 0.02 280);
+    --popover: oklch(16% 0.03 280);
+    --popover-foreground: oklch(92% 0.02 280);
+    --primary: oklch(70% 0.25 280);
+    --primary-foreground: oklch(12% 0.03 280);
+    --secondary: oklch(24% 0.03 280);
+    --secondary-foreground: oklch(92% 0.02 280);
+    --muted: oklch(24% 0.03 280);
+    --muted-foreground: oklch(65% 0.02 280);
+    --accent: oklch(24% 0.03 280);
+    --accent-foreground: oklch(92% 0.02 280);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(98% 0.01 25);
+    --success: oklch(60% 0.15 145);
+    --success-foreground: oklch(98% 0.01 145);
+    --warning: oklch(70% 0.15 85);
+    --warning-foreground: oklch(20% 0.02 85);
+    --border: oklch(28% 0.03 280);
+    --input: oklch(28% 0.03 280);
+    --ring: oklch(70% 0.25 280);
+    --sidebar-background: oklch(16% 0.03 280);
+    --sidebar-foreground: oklch(92% 0.02 280);
+    --sidebar-primary: oklch(70% 0.25 280);
+    --sidebar-primary-foreground: oklch(12% 0.03 280);
+    --sidebar-accent: oklch(24% 0.03 280);
+    --sidebar-accent-foreground: oklch(92% 0.02 280);
+    --sidebar-border: oklch(28% 0.03 280);
+    --sidebar-ring: oklch(70% 0.25 280);
+
+    /* Messaging colors - earth tones (futuristic) */
+    --message-sent-bg: oklch(30% 0.08 35);
+    --message-received-bg: oklch(30% 0.06 145);
+    --conversation-hover: oklch(20% 0.03 280);
+    --unread-accent: oklch(60% 0.15 35);
+
+    /* Glassmorphism properties - futuristic */
+    --glass-bg-opacity: 0.2;
+    --glass-border-opacity: 0.3;
+    --glass-blur: 16px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Nature-inspired gradient background */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(
+      135deg,
+      oklch(75% 0.15 145) 0%,
+      oklch(70% 0.12 160) 15%,
+      oklch(65% 0.1 140) 30%,
+      oklch(60% 0.12 35) 50%,
+      oklch(55% 0.1 25) 70%,
+      oklch(60% 0.14 20) 85%,
+      oklch(65% 0.12 145) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 20s ease infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Dark theme gradient */
+  .dark body::before {
+    background: linear-gradient(
+      135deg,
+      oklch(25% 0.08 145) 0%,
+      oklch(22% 0.06 160) 15%,
+      oklch(20% 0.05 140) 30%,
+      oklch(18% 0.06 35) 50%,
+      oklch(16% 0.05 25) 70%,
+      oklch(18% 0.07 20) 85%,
+      oklch(22% 0.06 145) 100%
+    );
+  }
+
+  /* Land-gold theme gradient */
+  .land-gold body::before {
+    background: linear-gradient(
+      135deg,
+      oklch(80% 0.12 145) 0%,
+      oklch(75% 0.1 160) 15%,
+      oklch(70% 0.08 140) 30%,
+      oklch(65% 0.1 35) 50%,
+      oklch(60% 0.08 25) 70%,
+      oklch(65% 0.12 20) 85%,
+      oklch(70% 0.1 145) 100%
+    );
+  }
+
+  /* Futuristic theme gradient */
+  .futuristic body::before {
+    background: linear-gradient(
+      135deg,
+      oklch(20% 0.08 145) 0%,
+      oklch(18% 0.06 160) 15%,
+      oklch(16% 0.05 140) 30%,
+      oklch(14% 0.06 35) 50%,
+      oklch(12% 0.05 25) 70%,
+      oklch(14% 0.07 20) 85%,
+      oklch(18% 0.06 145) 100%
+    );
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism utilities */
+  .glass-surface {
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity));
+    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-card {
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity));
+    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .glass-message {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .glass-surface,
+  .dark .glass-card,
+  .dark .glass-message {
+    background-color: rgba(0, 0, 0, var(--glass-bg-opacity));
+    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+  }
+
+  .theme-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--primary)) 0%,
+      oklch(var(--primary) / 0.8) 100%
+    );
+  }
+
+  .theme-glow {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-lift {
+    @apply transition-transform hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .depth-1 {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .depth-2 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .depth-3 {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .depth-4 {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .formal-card {
+    background-color: oklch(var(--card));
+    border: 1px solid oklch(var(--border));
+    border-left: 3px solid oklch(var(--primary));
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .status-badge-verified {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #0d5a3a;
+  }
+
+  .status-badge-pending {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #b45309;
+  }
+
+  .status-badge-rejected {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #d32f2f;
+  }
+
+  .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 2px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.75);
+    transition: background-color 0.15s, color 0.15s;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+
+  .sidebar-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .sidebar-nav-item.active {
+    background-color: #0d5a3a;
+    color: #ffffff;
+  }
+}
+
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: oklch(var(--status-verified));
+  background-color: oklch(var(--status-verified) / 0.15);
+  border: 1px solid oklch(var(--status-verified) / 0.3);
+}
+
+.badge-pending {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: oklch(var(--status-pending));
+  background-color: oklch(var(--status-pending) / 0.15);
+  border: 1px solid oklch(var(--status-pending) / 0.3);
+}
+
+.badge-rejected {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: oklch(var(--status-rejected));
+  background-color: oklch(var(--status-rejected) / 0.15);
+  border: 1px solid oklch(var(--status-rejected) / 0.3);
+}
+
+.pill-verified {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: oklch(var(--status-verified));
+  background-color: oklch(var(--status-verified) / 0.2);
+  border: 1px solid oklch(var(--status-verified) / 0.4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.pill-pending {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: oklch(var(--status-pending));
+  background-color: oklch(var(--status-pending) / 0.2);
+  border: 1px solid oklch(var(--status-pending) / 0.4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.pill-rejected {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: oklch(var(--status-rejected));
+  background-color: oklch(var(--status-rejected) / 0.2);
+  border: 1px solid oklch(var(--status-rejected) / 0.4);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.stage-progress {
+  @apply flex items-center justify-between relative;
+}
+
+.stage-dot {
+  @apply w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300 relative z-10;
+}
+
+.stage-dot.stage-1 {
+  @apply bg-chart-1 text-white;
+}
+
+.stage-dot.stage-2 {
+  @apply bg-chart-2 text-white;
+}
+
+.stage-dot.stage-3 {
+  @apply bg-chart-3 text-white;
+}
+
+.stage-dot.stage-4 {
+  @apply bg-chart-4 text-white;
+}
+
+.stage-dot.stage-5 {
+  @apply bg-chart-5 text-white;
+}
+
+.stage-dot.active {
+  @apply scale-110 shadow-lg;
+}
+
+.stage-line {
+  @apply absolute h-1 bg-gradient-to-r top-1/2 transform -translate-y-1/2 -z-0;
+}
