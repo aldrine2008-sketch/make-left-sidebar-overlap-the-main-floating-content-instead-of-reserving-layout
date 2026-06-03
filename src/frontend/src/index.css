@@ -54,6 +54,16 @@
     --glass-border-opacity: 0.25;
     --glass-blur: 24px;
 
+    /* Z-Index Stack */
+    --z-bg: -1;
+    --z-content: 0;
+    --z-header: 20;
+    --z-sidebar-backdrop: 40;
+    --z-sidebar: 50;
+    --z-modal-backdrop: 40;
+    --z-modal: 50;
+    --z-tooltip: 60;
+
     --chart-1: 55% 0.18 240;
     --chart-2: 60% 0.15 145;
     --chart-3: 70% 0.15 85;
@@ -235,7 +245,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: var(--z-bg);
     background: linear-gradient(
       135deg,
       oklch(75% 0.15 145) 0%,
@@ -352,6 +362,27 @@
 
   .btn-lift {
     @apply transition-transform hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Z-Index utilities */
+  .z-sidebar-backdrop {
+    z-index: var(--z-sidebar-backdrop);
+  }
+
+  .z-sidebar {
+    z-index: var(--z-sidebar);
+  }
+
+  .z-header {
+    z-index: var(--z-header);
+  }
+
+  .z-modal {
+    z-index: var(--z-modal);
+  }
+
+  .z-tooltip {
+    z-index: var(--z-tooltip);
   }
 
   .depth-1 {

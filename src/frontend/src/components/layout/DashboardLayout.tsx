@@ -67,12 +67,13 @@ export default function DashboardLayout() {
           aria-label="Main Navigation"
           aria-hidden={!isSidebarOpen && window.innerWidth < 768 ? "true" : "false"}
         >
-          {/* Sidebar Content */}
+          {/* Desktop Sidebar */}
           <div className="hidden md:block">
             <AppSidebar />
           </div>
-          {/* Mobile version with close button */}
-          <div className="md:hidden">
+          
+          {/* Mobile Sidebar with Close Button */}
+          <div className="md:hidden flex flex-col h-full">
             <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
               <span className="text-sm font-semibold tracking-wider">Navigation</span>
               <button
@@ -83,7 +84,9 @@ export default function DashboardLayout() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <AppSidebar />
+            <div className="flex-1 overflow-y-auto">
+              <AppSidebar />
+            </div>
           </div>
         </aside>
 
